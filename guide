@@ -1,0 +1,41 @@
+#ARG	REGISTER
+ID	rax
+1	rdi
+2	rsi
+3	rdx
+4	r10
+5	r8
+6	r9
+
+
+
+jump: jump to a memory address (via a label):
+
+jmp label_name
+
+
+
+compare: compare a register with another register or with a value
+
+cmp rax, 1
+cmp rax, rdi
+
+as a result, the ZF flag is set to 1 if the comparison succeded (e.g. if rax=1 in our first example), or to 0 if it failed (rax <> 1)
+since the ZF flag is set, we can have conditional jumps, following the comparison.
+for example, we can compare rax with 1 and jump to the memory address identified by the label "_doThis" if the value of rax was in fact 1. if it wasn't, we will jump to the memory address identified by the label "_doThat":
+
+cmp rax, 1
+je _doThis
+jne _doThat
+
+
+
+pointers: i.e. how to use registers as a pointer to specific memory addresses. 
+
+consider the following example, where we move the value of the rbx register in the rax register
+
+mov rax, rbx 
+
+contrast this with this other example, where we move the value that the rbx register is pointing to into the rax register
+
+mov rax, [rbx]
